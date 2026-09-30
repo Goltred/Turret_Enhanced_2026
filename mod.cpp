@@ -1,10 +1,10 @@
-name = "Turret Enhanced";
-picture = "Turret_Enhanced\data\TE_256.paa";
-logoSmall = "Turret_Enhanced\data\TE_256.paa";
-logo = "Turret_Enhanced\data\TE_256.paa";
-logoOver = "Turret_Enhanced\data\TE_256.paa";
-action = "//http://forums.tsog-milsim.com/";
-tooltipOwned = "Turret Enhanced";
+name = "Turret Enhanced (2026 Version)";
+picture = "\Turret_Enhanced_2026\data\TE_256.paa";
+logoSmall = "\Turret_Enhanced_2026\data\TE_256.paa";
+logo = "\Turret_Enhanced_2026\data\TE_256.paa";
+logoOver = "\Turret_Enhanced_2026\data\TE_256.paa";
+action = "//http://paramarines.net/";
+tooltipOwned = "Turret Enhanced (2026 Version)";
 dlcColor[] = 
 {
 	0.23,

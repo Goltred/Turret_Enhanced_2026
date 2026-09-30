@@ -1,3 +1,12 @@
 
 Fat_Lurch_TurretEnhanced.biprivatekey
 Fat_Lurch_TurretEnhanced.biprivatekey
+
+# HEMTT
+.hemttout/
+*.hemttprivatekey
+releases/
+*.biprivatekey
+
+# Local release settings (path to your signing key) - tools/release.ps1 -Configure
+tools/release.local.json

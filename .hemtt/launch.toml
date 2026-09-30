@@ -1,0 +1,5 @@
+# `hemtt launch` - builds the mod and starts Arma 3 with it loaded (needs Arma 3 installed via Steam)
+[default]
+workshop = [
+    "450814997", # CBA_A3
+]
