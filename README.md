@@ -35,16 +35,9 @@ place - same folders, same functions - and only uses the `GLT` prefix for what i
   `GLT_PREFIX` in `addons/main/script_name.hpp`. To rename the prefix, change `GLT_PREFIX`, `$PBOPREFIX$` and the
   4 image paths in `mod.cpp`. SQF code has no paths in it (functions go through CfgFunctions).
 - `addons/main/script_version.hpp` - mod version used by HEMTT. Keep `version` in `CfgPatches` (config.cpp) in sync.
-- `tools/gui-editor/` - Arma GUI editor projects for the altitude / loiter dialogs (not packed).
-- `docs/notes/` - development notes (not packed).
 - `media/` - Workshop screenshots (not packed).
 
 ## Publishing
-
-`hemtt release` can't sign with an existing `.biprivatekey` (it only uses a throwaway key or its own
-`.hemttprivatekey` format), so releases go through `release.cmd` / `tools/release.ps1`. It builds with HEMTT
-(unsigned), signs every PBO with your key using **DSSignFile** from Arma 3 Tools (Steam), adds the matching
-`.bikey` to `keys/`, checks the signatures with DSCheckSignatures, and zips the mod.
 
 1. Install Arma 3 Tools from Steam. Keep your `.biprivatekey` and its `.bikey` together, **outside** the repo.
 2. One-time setup - choose the key:
@@ -71,6 +64,3 @@ Output: `releases/@turret_enhanced_2026/` - the finished, signed mod (`addons/*.
 a server. It is emptied and rebuilt on every run (close Arma / the launcher first if it is loaded). Plus
 `releases/turret_enhanced_2026-<version>.zip` / `-latest.zip` containing that folder. Servers need the
 `.bikey` from `keys/`. The version comes from `addons/main/script_version.hpp`.
-
-The script refuses `Fat_Lurch_TurretEnhanced.biprivatekey`: that key is public in the upstream git history,
-so anyone could sign PBOs with it.
