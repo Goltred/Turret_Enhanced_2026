@@ -260,7 +260,7 @@ private _refreshActions = {
 [
     "GLT_MarkerOverlayShow",
     "CHECKBOX",
-    ["Enable Camera Marker Overlay", "Server-wide. Allows markers to be drawn as icons in the turret / UAV camera view. Off: no markers in the camera view for anyone, and the 'Cycle Camera Markers' key does nothing."],
+    ["Enable Camera Marker Overlay", "Server-wide. Allows markers to be drawn as icons in the turret / UAV camera view. Off: no markers in the camera view for anyone (the 'Cycle Camera Overlay' key then only switches friendly lasers on / off via Declutter)."],
     [GLT_MOD_NAME, "Camera Overlay"],
     true,
     1,
@@ -287,14 +287,14 @@ private _refreshActions = {
     {if (!isNil "GLT_fnc_buildOverlayList") then {call GLT_fnc_buildOverlayList}}
 ] call CBA_Settings_fnc_init;
 
-// Player's choice, also changed by the 'Cycle Camera Markers' key. A mode the server doesn't allow falls
+// Player's choice, also changed by the 'Cycle Camera Overlay' key / scroll action. A mode the server doesn't allow falls
 // back to the other allowed mode, or to no markers.
 [
     "GLT_MarkerOverlayMode",
     "LIST",
-    ["Markers Shown", "Which markers are drawn in the camera view. The 'Cycle Camera Markers' key (Options > Controls, default SHIFT+7) cycles through the modes the server allows."],
+    ["Overlay Mode", "What the camera view shows. Declutter: nothing. No markers: only friendly lasers. My markers / All map markers: markers + friendly lasers. The 'Cycle Camera Overlay' key (Options > Controls, default SHIFT+7) and the 'Camera Overlay' scroll-menu action cycle through the modes the server allows."],
     [GLT_MOD_NAME, "Camera Overlay"],
-    [[0, 1, 2], ["No markers", "My markers", "All map markers"], 1],
+    [[3, 0, 1, 2], ["Declutter (nothing)", "No markers (lasers only)", "My markers", "All map markers"], 2],
     nil,
     {if (!isNil "GLT_fnc_buildOverlayList") then {call GLT_fnc_buildOverlayList}}
 ] call CBA_Settings_fnc_init;
@@ -337,5 +337,41 @@ private _refreshActions = {
     true,
     nil,
     {}
+] call CBA_Settings_fnc_init;
+
+[
+    "GLT_LaserOverlayAllow",
+    "CHECKBOX",
+    ["Allow Friendly Lasers in Camera View", "Server-wide. Players may see where other friendly players, soldiers and vehicles are lasing, drawn in their turret / UAV camera view."],
+    [GLT_MOD_NAME, "Laser"],
+    true,
+    1,
+    {if (!isNil "GLT_fnc_buildOverlayList") then {call GLT_fnc_buildOverlayList}}
+] call CBA_Settings_fnc_init;
+
+[
+    "GLT_LaserOverlayShow",
+    "CHECKBOX",
+    ["Show Friendly Lasers in Camera View", "Draw the laser spots of other friendly players, soldiers and vehicles (designators switched on) in the camera view, labelled with the lasing group's name and, with ACE, the laser code. Only spots your camera can see are shown (in view and not hidden by terrain or buildings). The laser of the camera you are looking through is not marked (it shows its own); your own soldier or aircraft lasing is shown when you use another camera, e.g. a UAV."],
+    [GLT_MOD_NAME, "Laser"],
+    true,
+    nil,
+    {if (!isNil "GLT_fnc_buildOverlayList") then {call GLT_fnc_buildOverlayList}}
+] call CBA_Settings_fnc_init;
+
+[
+    "GLT_LaserOverlayIconSize",
+    "SLIDER",
+    ["Friendly Laser Icon Size", "Size of the laser spot icon in the camera view (markers use 0.8)."],
+    [GLT_MOD_NAME, "Laser"],
+    [0.2, 1.5, 0.6, 2]
+] call CBA_Settings_fnc_init;
+
+[
+    "GLT_LaserOverlayTextColor",
+    "COLOR",
+    ["Friendly Laser Label Colour", "Colour of the group name / laser code shown under the laser spot icon. The label keeps its black outline."],
+    [GLT_MOD_NAME, "Laser"],
+    [1, 0.15, 0.15, 1]
 ] call CBA_Settings_fnc_init;
 

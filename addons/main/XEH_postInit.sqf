@@ -14,6 +14,13 @@ if (isNil "GLT_markerCounter") then {GLT_markerCounter = 0};
 if (isNil "GLT_myMarkers") then {GLT_myMarkers = []};
 if (isNil "GLT_hiddenMarkers") then {GLT_hiddenMarkers = []};	// hidden from the camera overlay via Marker List
 
+// Laser spots announced by the machine that created them (GLT_fnc_laserCreated): [[laserObject, owner], ...]
+if (isNil "GLT_laserRegistry") then {GLT_laserRegistry = []};
+["GLT_laserOn", {
+	params ["_laser", "_owner"];
+	if (!isNull _laser && {!isNull _owner}) then {GLT_laserRegistry pushBack [_laser, _owner]};
+}] call CBA_fnc_addEventHandler;
+
 // Camera marker overlay and laser map drawing
 call GLT_fnc_overlayInit;
 

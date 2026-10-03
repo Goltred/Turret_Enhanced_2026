@@ -18,6 +18,9 @@ private _markerActionIds = [];
 } forEach [[1, 0], [2, 1], [3, 2], [4, 2.2]];
 _unit setVariable ["GLT_markerActionIds", _markerActionIds];
 _unit addAction ["Marker List", {["open"] call GLT_fnc_markerList;}, nil, _pri - 2.5, false, true, "", "(([_this, _target] call fatlurch_fnc_isViewISR)&&(Fat_Lurch_Markers))"];	// GLT: new
+// GLT: new - same as the "Cycle Camera Overlay" key; title shows the current mode (GLT_fnc_buildOverlayList keeps
+// it current). The menu stays open so it can be used repeatedly.
+_unit setVariable ["GLT_overlayActionId", _unit addAction [format ["Camera Overlay: %1", GLT_overlayModeNames select ((call GLT_fnc_overlayModes) select 0)], {[] call GLT_fnc_cycleMarkerOverlay}, nil, _pri - 2.6, false, false, "", "([_this, _target] call fatlurch_fnc_isViewISR)"]];
 
 _unit addAction ["Change Altitude", "_this call fatlurch_fnc_changeAltitude",nil, _pri - 3,false, true, "","(([_this, _target] call fatlurch_fnc_isViewISR) && (_target isKindOf 'uav'))"];	//2020_08_24
 _unit addAction ["Change Loiter", "_this call fatlurch_fnc_changeLoiter",nil, _pri - 4,false, true, "","(([_this, _target] call fatlurch_fnc_isViewISR) && (_target isKindOf 'uav') && (waypointType [group _target, currentWaypoint group _target] == 'LOITER'))"];	//2020_08_24

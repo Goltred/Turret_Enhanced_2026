@@ -10,7 +10,8 @@
 			* laser caches for the map: candidate vehicles (enabled types, crewed, minus MQ-9s when
 			  "Skip MQ-9" is on) and the ones currently lasing
 			* hooks the laser map drawing into the main map and UAV terminal map
-		- a single Draw3D handler for the camera marker overlay
+			* friendly laser spots for the camera view (GLT_fnc_friendlyLasers)
+		- a single Draw3D handler for the camera overlay (markers + friendly lasers)
 */
 
 if (!hasInterface) exitWith {};
@@ -40,6 +41,9 @@ GLT_lasingCache = [];
 	// --- Markers for the camera overlay (drawn every frame from this list)
 	call GLT_fnc_buildOverlayList;
 
+	// --- Other friendly lasers for the camera overlay (drawn every frame from this list)
+	call GLT_fnc_friendlyLasers;
+
 	// --- Attach the laser map drawing to any map control that exists and isn't hooked yet
 	{
 		private _ctrl = (findDisplay _x) displayCtrl 51;
@@ -53,4 +57,5 @@ GLT_lasingCache = [];
 
 addMissionEventHandler ["Draw3D", {
 	call GLT_fnc_drawMarkerOverlay;
+	call GLT_fnc_drawLaserOverlay;
 }];

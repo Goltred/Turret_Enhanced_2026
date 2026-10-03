@@ -25,7 +25,7 @@ class CfgPatches
 		weapons[] = {};
 		requiredVersion = 2.14;	// GLT: hashmaps, lockCameraTo "temporary", mission EH arguments
 		requiredAddons[] = {"A3_Data_F_Sams_LoadOrder","cba_main"};
-		version = "0.3.0";	// GLT: keep in sync with script_version.hpp (read by HEMTT)
+		version = "0.1.0";	// GLT: keep in sync with script_version.hpp (read by HEMTT)
 		author = "Fat_Lurch";
 		name = GLT_MOD_NAME;	// GLT: display name
 	};
@@ -48,6 +48,23 @@ class Extended_PostInit_EventHandlers	// GLT: keybinds, local marker counter, ov
 };
 
 
+
+// GLT: announce who owns each new laser spot (GLT_fnc_laserCreated), so other players' handheld
+// designators can be shown in the camera view. Same hook ACE uses; the two EventHandlers classes merge.
+class CfgVehicles
+{
+	class All;
+	class LaserTarget: All
+	{
+		class EventHandlers
+		{
+			class GLT_TurretEnhanced
+			{
+				init = "_this call GLT_fnc_laserCreated";
+			};
+		};
+	};
+};
 
 class CfgFunctions
 {
@@ -168,12 +185,15 @@ class CfgFunctions
 			class addMarker {file = GLT_QPATH(functions\addMarker.sqf);};
 			class buildOverlayList {file = GLT_QPATH(functions\buildOverlayList.sqf);};
 			class cycleMarkerOverlay {file = GLT_QPATH(functions\cycleMarkerOverlay.sqf);};
+			class drawLaserOverlay {file = GLT_QPATH(functions\drawLaserOverlay.sqf);};
 			class drawLaserMap {file = GLT_QPATH(functions\drawLaserMap.sqf);};
 			class drawMarkerOverlay {file = GLT_QPATH(functions\drawMarkerOverlay.sqf);};
+			class friendlyLasers {file = GLT_QPATH(functions\friendlyLasers.sqf);};
 			class getISRVehicle {file = GLT_QPATH(functions\getISRVehicle.sqf);};
 			class isEnabledFor {file = GLT_QPATH(functions\isEnabledFor.sqf);};
 			class isMQ9 {file = GLT_QPATH(functions\isMQ9.sqf);};
 			class keyName {file = GLT_QPATH(functions\keyName.sqf);};
+			class laserCreated {file = GLT_QPATH(functions\laserCreated.sqf);};
 			class laserInfo {file = GLT_QPATH(functions\laserInfo.sqf);};
 			class markerActionTitle {file = GLT_QPATH(functions\markerActionTitle.sqf);};
 			class markerDialog {file = GLT_QPATH(functions\markerDialog.sqf);};
@@ -611,8 +631,8 @@ class CfgUserActions
 	};
 	class GLT_cycleMarkerOverlay: GLT_markSlot1
 	{
-		displayName = "Cycle Camera Markers (none / mine / all)";
-		tooltip = "Cycles the markers drawn in the camera view: No markers, My markers, All map markers. Settings forced by the server are respected";
+		displayName = "Cycle Camera Overlay (declutter / lasers / markers)";
+		tooltip = "Cycles what the camera view shows: Declutter (nothing), No markers (lasers only), My markers, All map markers. Modes the server doesn't allow are skipped";
 	};
 };
 
