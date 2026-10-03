@@ -25,7 +25,7 @@ class CfgPatches
 		weapons[] = {};
 		requiredVersion = 2.14;	// GLT: hashmaps, lockCameraTo "temporary", mission EH arguments
 		requiredAddons[] = {"A3_Data_F_Sams_LoadOrder","cba_main"};
-		version = "0.1.0";	// GLT: keep in sync with script_version.hpp (read by HEMTT)
+		version = "0.2.0";	// GLT: keep in sync with script_version.hpp (read by HEMTT)
 		author = "Fat_Lurch";
 		name = GLT_MOD_NAME;	// GLT: display name
 	};
